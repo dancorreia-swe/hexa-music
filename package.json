@@ -6,6 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "migrate": "drizzle-kit migrate --config ./src/contexts/shared/database/drizzle.config.ts",
+    "migrate:generate": "drizzle-kit generate --config ./src/contexts/shared/database/drizzle.config.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

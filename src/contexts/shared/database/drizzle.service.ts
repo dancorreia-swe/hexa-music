@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { CONNECTION_POOL } from './database.module-definition';
-import { databaseSchema } from './database-schema';
+import * as databaseSchema from './schema';
 import { Pool } from 'pg';
 
 @Injectable()

@@ -7,8 +7,8 @@ config();
 const configService = new ConfigService();
 
 export default defineConfig({
-  schema: './src/common/database/database-schema.ts',
-  out: './drizzle',
+  schema: './src/contexts/shared/database/schema/index.ts',
+  out: './src/contexts/shared/database/migrations',
   dialect: 'postgresql',
   dbCredentials: {
     host: configService.get('DB_HOST'),
