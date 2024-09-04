@@ -12,10 +12,20 @@ export class PrismaUserRepository extends UserRepository {
   async save(user: User): Promise<void> {
     await this.prisma.user.create({ data: { ...user.toPrimitives() } });
   }
+
   async findById(uuid: string): Promise<User | null> {
-    throw new Error('Method not implemented.');
+    const user = await this.prisma.user.findUnique({ where: { id: uuid } });
+    return user ? new User(user) : null;
   }
+
   async delete(uuid: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    await this.prisma.user.update({
+      where: { id: uuid },
+      data: { deletedAt: new Date() },
+    });
+  }
+
+  async destroy(uuid: string): Promise<void> {
+    await this.prisma.user.delete({ where: { id: uuid } });
   }
 }
