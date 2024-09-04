@@ -18,6 +18,11 @@ export class PrismaUserRepository extends UserRepository {
     return user ? new User(user) : null;
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    return user ? new User(user) : null;
+  }
+
   async delete(uuid: string): Promise<void> {
     await this.prisma.user.update({
       where: { id: uuid },

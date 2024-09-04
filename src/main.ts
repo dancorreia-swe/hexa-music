@@ -5,15 +5,17 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-
 import { AppModule } from './app/app.module';
+import { API } from './app/http-api/routes/route.constants';
+import { ErrorResponseNormalizerFilter } from './app/http-api/response-normalizer/error-response-normalizer.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix(API);
+  app.useGlobalFilters(app.get(ErrorResponseNormalizerFilter));
 
   app.useGlobalPipes(
     new ValidationPipe({
