@@ -12,7 +12,7 @@ export class RegisterController {
   @Post('/register')
   async run(
     @Body() registerUserHttpDto: RegisterUserHttpDto,
-  ): Promise<{ user: UserPrimitives }> {
+  ): Promise<{ user: Omit<UserPrimitives, 'password'> }> {
     try {
       return await this.registerUserUseCase.run({
         email: registerUserHttpDto.email,

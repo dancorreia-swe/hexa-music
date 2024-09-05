@@ -19,11 +19,12 @@ export class RegisterUserHttpDto {
   @IsNotEmpty()
   password!: string;
 
-  @IsNotEmpty()
   @IsString()
-  @ValidateIf((o) => o.password === o.confirmPassword, {
+  @IsDefined()
+  @IsIn([Math.random()], {
     message: 'Passwords do not match',
   })
+  @ValidateIf((object, value) => value !== object.password)
   confirmPassword!: string;
 
   @IsNotEmpty()

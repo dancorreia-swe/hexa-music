@@ -7,13 +7,16 @@ import { User, UserPrimitives } from '../../../domain/user.entity';
 export class RegisterUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async run(registerDto: RegisterUserDto): Promise<{ user: UserPrimitives }> {
+  async run(
+    registerDto: RegisterUserDto,
+  ): Promise<{ user: Omit<UserPrimitives, 'password'> }> {
     const user = User.create(registerDto);
 
     await this.userRepository.save(user);
 
+    const { password, ...userWithoutPassword } = user.toPrimitives();
     return {
-      user: user.toPrimitives(),
+      user: userWithoutPassword,
     };
   }
 }

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 type UserType = 'COMMON' | 'ARTIST';
@@ -27,7 +27,7 @@ export class User {
     return new User({
       ...attributes,
       id: uuidv4(),
-      password: 'hi',
+      password: bcrypt.hashSync(attributes.password, 10),
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,
