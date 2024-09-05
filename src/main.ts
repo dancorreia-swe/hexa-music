@@ -1,21 +1,16 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
 import { AppModule } from './app/app.module';
 import { API } from './app/http-api/routes/route.constants';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ErrorResponseNormalizerFilter } from './app/http-api/response-normalizer/error-response-normalizer.filter';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter(),
-  );
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setGlobalPrefix(API);
-  app.useGlobalFilters(app.get(ErrorResponseNormalizerFilter));
+  // app.useGlobalFilters(app.get(ErrorResponseNormalizerFilter));
 
   app.useGlobalPipes(
     new ValidationPipe({

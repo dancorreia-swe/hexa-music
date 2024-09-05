@@ -18,8 +18,10 @@ export class PrismaUserRepository extends UserRepository {
     return user ? new User(user) : null;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
+  async findByEmailOrUsername(username: string): Promise<User | null> {
+    const user = await this.prisma.user.findFirst({
+      where: { OR: [{ email: username }, { username }] },
+    });
     return user ? new User(user) : null;
   }
 
