@@ -11,7 +11,7 @@ import { DeleteAlbumHttpDto } from "./delete-album.http-dto";
 export class DeleteAlbumController {
     constructor (private readonly deleteAlbumUseCase: DeleteAlbumUseCase) {}
 
-    @Delete(":id/soft-delete")
+    @Patch(":id/soft-delete")
     async run (@Param() dto: DeleteAlbumHttpDto): Promise<{ data: string }> {
         try {
             return await this.deleteAlbumUseCase.run({ id: dto.id });

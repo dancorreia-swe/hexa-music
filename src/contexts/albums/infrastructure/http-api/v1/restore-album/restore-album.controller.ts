@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, NotFoundException, Param, UseGuards } from "@nestjs/common";
+import { Controller, Delete, Get, NotFoundException, Param, Patch, UseGuards } from "@nestjs/common";
 import { V1_ALBUM } from "../../route.constants";
 import { AlbumNotFoundException } from "@/contexts/albums/domain/album-not-found.exception";
 import { JwtAuthGuard } from "@/contexts/shared/auth/application/guards/jwt.guard";
@@ -10,7 +10,7 @@ import { RestoreAlbumHttpDto } from "./restore-album.http-dto";
 export class RestoreAlbumController {
     constructor (private readonly restoreAlbumUseCase: RestoreAlbumUseCase) {}
 
-    @Get(":id/restore")
+    @Patch(":id/restore")
     async run (@Param() dto: RestoreAlbumHttpDto): Promise<{ data: string }> {
         try {
             return await this.restoreAlbumUseCase.run({ id: dto.id });
