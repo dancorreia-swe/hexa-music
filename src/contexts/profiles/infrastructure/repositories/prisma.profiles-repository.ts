@@ -16,4 +16,18 @@ export class PrismaProfilesRepository extends ProfileRepository {
       },
     });
   }
+
+  async findByUserId(userId: string): Promise<Profile | null> {
+    const profile = await this.prisma.profile.findFirst({ where: { userId } });
+    return profile ? new Profile(profile) : null;
+  }
+
+  async update(profile: Profile): Promise<void> {
+    await this.prisma.profile.update({
+      where: { userId: profile.toPrimitives().userId },
+      data: {
+        ...profile.toPrimitives(),
+      },
+    });
+  }
 }

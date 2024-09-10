@@ -1,6 +1,6 @@
-export interface CreateProfileDto {
+export interface EditProfileDto {
   userId: string;
-  name: string;
+  username: string;
   bio: string;
   profilePic: string;
 }
