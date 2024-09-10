@@ -1,11 +1,10 @@
-import * as bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
+import * as bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
 
-type UserType = 'COMMON' | 'ARTIST';
+type UserType = "COMMON" | "ARTIST";
 
 export type UserPrimitives = {
   id?: string;
-  profileImage: string;
   username: string;
   password: string;
   type: UserType;
@@ -21,7 +20,7 @@ export class User {
   static create(
     attributes: Omit<
       UserPrimitives,
-      'id' | 'createdAt' | 'updatedAt' | 'deletedAt'
+      "id" | "createdAt" | "updatedAt" | "deletedAt"
     >,
   ): User {
     return new User({

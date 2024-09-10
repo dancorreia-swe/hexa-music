@@ -1,7 +1,7 @@
-import { JsonValue } from '@prisma/client/runtime/library';
-import { v4 as uuidv4 } from 'uuid';
+import { JsonValue } from "@prisma/client/runtime/library";
+import { v4 as uuidv4 } from "uuid";
 
-export type AlbumType = 'SINGLE' | 'EP' | 'ALBUM';
+export type AlbumType = "SINGLE" | "EP" | "ALBUM";
 
 export interface AlbumPrimitives {
   id: string;
@@ -22,7 +22,7 @@ export class Album {
   static create(
     attributes: Omit<
       AlbumPrimitives,
-      'id' | 'createdAt' | 'updatedAt' | 'deletedAt'
+      "id" | "createdAt" | "updatedAt" | "deletedAt"
     >,
   ): Album {
     return new Album({

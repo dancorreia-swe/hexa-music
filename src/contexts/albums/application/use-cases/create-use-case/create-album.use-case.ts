@@ -5,15 +5,15 @@ import { CreateAlbumDto } from "./create-album.dto";
 
 @Injectable()
 export class CreateAlbumUseCase {
-    constructor(private readonly albumRepository: AlbumRepository) {}
+  constructor(private readonly albumRepository: AlbumRepository) {}
 
-    async run (dto: CreateAlbumDto): Promise<{ album: AlbumPrimitives }> {
-        const album = Album.create(dto);
+  async run(dto: CreateAlbumDto): Promise<{ album: AlbumPrimitives }> {
+    const album = Album.create(dto);
 
-        await this.albumRepository.save(album);
+    await this.albumRepository.save(album);
 
-        return {
-            album: album.toPrimitives(),
-        };
-    }
+    return {
+      album: album.toPrimitives(),
+    };
+  }
 }

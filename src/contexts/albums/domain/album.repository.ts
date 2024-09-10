@@ -1,4 +1,4 @@
-import { Album } from './album.entity';
+import { Album } from "./album.entity";
 
 export abstract class AlbumRepository {
   abstract save(album: Album): Promise<void>;

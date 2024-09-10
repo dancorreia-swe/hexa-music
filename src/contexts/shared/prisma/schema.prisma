@@ -14,17 +14,17 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
-  username     String    @unique
-  profileImage String?   @map("profile_image")
-  password     String
-  type         UserType
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
-  deletedAt    DateTime? @map("deleted_at")
+  id        String    @id @default(uuid())
+  email     String    @unique
+  username  String    @unique
+  password  String
+  type      UserType
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
 
-  albums Album[]
+  albums  Album[]
+  Profile Profile?
 
   @@map("users")
 }
@@ -32,6 +32,18 @@ model User {
 enum UserType {
   COMMON
   ARTIST
+}
+
+model Profile {
+  id           Int      @id @default(autoincrement())
+  profileImage String?  @map("profile_image")
+  userId       String   @unique @map("user_id")
+  user         User     @relation(fields: [userId], references: [id])
+  bio          String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("profiles")
 }
 
 model Album {

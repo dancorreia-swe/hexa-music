@@ -1,11 +1,11 @@
-import { ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
-import { API } from './app/http-api/routes/route.constants';
+import { ValidationPipe } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app/app.module";
+import { API } from "./app/http-api/routes/route.constants";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ErrorResponseNormalizerFilter } from './app/http-api/response-normalizer/error-response-normalizer.filter';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import { ErrorResponseNormalizerFilter } from "./app/http-api/response-normalizer/error-response-normalizer.filter";
+import { NestExpressApplication } from "@nestjs/platform-express";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -21,9 +21,9 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
-  const port = configService.get<string>('PORT', '3000');
+  const port = configService.get<string>("PORT", "3000");
 
-  await app.listen(port, '0.0.0.0');
+  await app.listen(port, "0.0.0.0");
 }
 
 bootstrap().catch(handleError);
@@ -33,4 +33,4 @@ function handleError(error: unknown) {
   process.exit(1);
 }
 
-process.on('uncaughtException', handleError);
+process.on("uncaughtException", handleError);

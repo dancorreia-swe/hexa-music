@@ -5,39 +5,39 @@ import { Album } from "../../domain/album.entity";
 
 @Injectable()
 export class PrismaAlbumRepository extends AlbumRepository {
-    constructor(private readonly prisma: PrismaService) {
-        super();
-    }
-    
-    async save(album: Album): Promise<void> {
-        await this.prisma.album.create({ data: { ...album.toPrimitives() } });
-    }
+  constructor(private readonly prisma: PrismaService) {
+    super();
+  }
 
-    async findById(uuid: string): Promise<Album | null> {
-        const album = await this.prisma.album.findUnique({
-            where: { id: uuid }
-        });
+  async save(album: Album): Promise<void> {
+    await this.prisma.album.create({ data: { ...album.toPrimitives() } });
+  }
 
-        return album ? new Album(album) : null;
-    }
+  async findById(uuid: string): Promise<Album | null> {
+    const album = await this.prisma.album.findUnique({
+      where: { id: uuid },
+    });
 
-    async delete(uuid: string): Promise<void> {
-        await this.prisma.album.update({
-            where: { id: uuid },
-            data: { deletedAt: new Date() }
-        });
-    }
+    return album ? new Album(album) : null;
+  }
 
-    async destroy(uuid: string): Promise<void> {
-        await this.prisma.album.delete({
-            where: { id: uuid }
-        });
-    }
+  async delete(uuid: string): Promise<void> {
+    await this.prisma.album.update({
+      where: { id: uuid },
+      data: { deletedAt: new Date() },
+    });
+  }
 
-    async restore(uuid: string) {
-        await this.prisma.album.update({
-            where: {id: uuid},
-            data: { deletedAt: null }
-        });
-    }
+  async destroy(uuid: string): Promise<void> {
+    await this.prisma.album.delete({
+      where: { id: uuid },
+    });
+  }
+
+  async restore(uuid: string) {
+    await this.prisma.album.update({
+      where: { id: uuid },
+      data: { deletedAt: null },
+    });
+  }
 }
