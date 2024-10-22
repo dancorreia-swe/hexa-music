@@ -8,10 +8,12 @@ import { JwtAuthGuard } from "@/contexts/shared/auth/application/guards/jwt.guar
 @UseGuards(JwtAuthGuard)
 @Controller(V1_ALBUM)
 export class CreateAlbumController {
-    constructor(private readonly createAlbumUseCase: CreateAlbumUseCase) {}
+  constructor(private readonly createAlbumUseCase: CreateAlbumUseCase) {}
 
-    @Post()
-    async run(@Body() dto: CreateAlbumHttpDto): Promise<{ album: AlbumPrimitives }> {
-        return await this.createAlbumUseCase.run(dto);
-    }
+  @Post()
+  async run(
+    @Body() dto: CreateAlbumHttpDto,
+  ): Promise<{ album: AlbumPrimitives }> {
+    return await this.createAlbumUseCase.run(dto);
+  }
 }

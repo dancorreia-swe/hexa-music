@@ -1,9 +1,20 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
+  "collectCoverage": true,
+  "coverageDirectory": "jest-coverage",
+  "coverageThreshold": {
+    "global": {
+      "statements": 95
+    }
+  },
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@app/([^/]*)/(.*)": "<rootDir>../../../libs/$1/src/$2",
+    "@app/(.*)": "<rootDir>../../../libs/$1/src"
   }
 }

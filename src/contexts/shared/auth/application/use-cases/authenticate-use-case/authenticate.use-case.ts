@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserRepository } from '../../../domain/user.repository';
-import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { UserRepository } from "../../../domain/user.repository";
+import * as bcrypt from "bcrypt";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthenticateUseCase {
@@ -27,8 +27,8 @@ export class AuthenticateUseCase {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload),
       this.jwtService.signAsync(payload, {
-        secret: 'supersecretkey',
-        expiresIn: '1d',
+        secret: "supersecretkey",
+        expiresIn: "1d",
       }),
     ]);
 
